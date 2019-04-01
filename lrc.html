@@ -1,0 +1,40 @@
+const Web3 = require('web3');
+    const ZeroClientProvider = require('web3-provider-engine/zero')
+    const Ethjs = require('ethjs')
+
+    const providerEngine = ZeroClientProvider({
+        // supports http and websockets
+        // but defaults to infura's mainnet rest api
+        rpcUrl: 'https://mainnet.infura.io',
+        // rpcUrl: 'http://localhost:8545',
+        //rpcUrl:'wss://rinkeby.infura.io/ws'
+        // rpcUrl: 'wss://mainnet.infura.io/ws',
+        // rpcUrl: 'ws://localhost:8545/ws',
+    })
+
+// use the provider to instantiate Ethjs, Web3, etc
+    const eth = new Ethjs(providerEngine)
+
+
+     const {address,abi} = require("./lrc.json")
+
+    const token = eth.contract(abi).at(address);
+
+    let {value} = req.query;
+
+    console.log(value)
+    if(!/^\d+$/.test(value)){
+        return res.json({data:"输入有误"})
+    }
+
+    value=dec(value);
+    console.log(value)
+
+   const bonus= await token.getBonus(value)
+
+
+     token.getBonus(value).then((totalSupply) => {
+        //console.log(totalSupply[0].toString(10))
+    });
+
+    return res.json({data:getAmount(bonus[0].toString(10))});
