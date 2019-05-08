@@ -65,10 +65,10 @@ function getAmount(amount) {
 @Injectable()
 export class AppService {
   async getHello(value) {
-    const token=new web3.eth.Contract(abi,address) 
+    const token=new web3.eth.Contract(abi,address)
 
-    console.log(value)
-    
+    console.log(address)
+
 
     value=dec(value);
     console.log(value)
